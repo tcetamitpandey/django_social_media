@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="post-container" style="padding: 20px; padding-bottom: 20vh; ">
+        {% for post in post_data reversed %}
+            <div class="post" style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+                <div class="user-info" style="font-weight: bold;">
+            
+                    <a href="profile/{{ post.user }} ">
+                        <span>@{{ post.user }}</span>
+                    </a>
+                    <small style="color: gray;">uploaded at: {{ post.created_at }}</small>
+                </div>
+                <div class="post-image" style="margin-top: 10px;">
+                    <a href="{{ post.post_img.url }}">
+                        <img src="{{ post.post_img.url }}" alt="" style="max-width: 60%; height: auto;">
+                    </a>
+                </div>
+                <div class="post-details" style="margin-top: 10px;">
+                    <p style="font-size: 16px;">
+                        <a href="profile/{{ post.user }} ">
+                            <b>@{{post.user}}</b>
+                        </a>
+                     : {{ post.caption }}</p>
+                    <div class="like-section" style="margin-top: 5px;">
+                        <a href="{% url 'like-post' post.id %}"><img src="{% static 'images/like.png' %}" alt="Like Icon" style="height: 20px;"></a>
+                        <span style="margin-left: 5px;">Likes: {{ post.no_of_likes }}</span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,26 @@
+Its a signup page
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+<form action="" method="post">
+
+    {% csrf_token %}
+
+    <input name="username" placeholder="Username" type="text">
+    <input name="email" placeholder="Email" type="email">
+    <input name="password" placeholder="Password" type="password">
+    <input name="password2" placeholder="Confirm Password" type="password">
+
+    <button type="submit" >Create New User</button>
+</form>
+
+<div>
+    <a href="{% url 'signin' %}">Already a user ?</a>
+</div>

@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<h1>Search Results</h1>
+
+{% for i in all_data_found %}
+
+    <div>
+        <img style="max-height: 80px;" src="{{i.profile_img.url}}" alt="">
+        <h5>{{i.username}}</h5>
+        <h6>{{i.bio}}</h6>
+        <small>{{i.location}}</small>
+        <div>
+            {% for interest in interests %}
+                <li>{{ interest.name }}</li>
+            {% endfor %}
+        </div>
+
+    </div>
+
+{% endfor %}
+
+
+{% endblock %}

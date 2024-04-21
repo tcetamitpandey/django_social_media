@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+</head>
+<body>
+    <div class="container">
+        <p>Account settings for <b>{{ user.username }}</b></p>
+
+        <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="profile">Profile Picture:</label>
+                <img style="max-height: 50px; border-radius: 50%;" src="{{ user_profile.profile_img.url }}" alt="">
+                <input type="file" name="profile" id="profile">
+            </div>            
+            <div class="form-group">
+                <label for="bio">Bio:</label>
+                <input type="text" name="bio" id="bio" value="{{user_profile.bio}}" placeholder="Bio">
+            </div>
+            <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" name="location" id="location" value="{{user_profile.location}}" placeholder="Location">
+            </div>
+            <div class="form-group">
+                <label>Interests:</label><br>
+                {% for data in interest_data %}
+                    <input type="checkbox" name="interests" value="{{ data.id }}"
+                           {% if data.id in selected_interest_ids %} checked {% endif %}>
+                    {{ data.name }}<br>
+                {% endfor %}
+            </div>            
+            
+            <input type="submit" value="Save">
+        </form>
+    </div>
+</body>
+</html>
